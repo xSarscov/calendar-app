@@ -1,0 +1,13 @@
+html,
+body, #root {
+  height: 100%;
+}
+
+#authSection {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #f5f5f5;
+}
