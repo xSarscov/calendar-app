@@ -12,8 +12,6 @@ import { useEffect } from "react";
 
 registerLocale('es', es)
 
-
-
 const customStyles = {
 	content: {
 		top: "50%",
@@ -30,7 +28,7 @@ Modal.setAppElement("#root");
 export const CalendarModal = () => {
 
     const { isDateModalOpen, closeDateModal } = useUiStore();
-    const { activeEvent } = useCalendarStore()
+    const { activeEvent, setActiveEvent } = useCalendarStore()
 
     const [formValues, setFormValues] = useState({
         title: '',
@@ -54,7 +52,6 @@ export const CalendarModal = () => {
         if (activeEvent) {
             setFormValues({ ...activeEvent });
         }
-
     }, [activeEvent])
     
 
@@ -94,6 +91,8 @@ export const CalendarModal = () => {
         if (formValues.title.length === 0) {
             return;
         }
+
+        console.log({event})
     }
 
     return (
