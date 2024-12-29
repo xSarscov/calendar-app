@@ -28,7 +28,7 @@ Modal.setAppElement("#root");
 export const CalendarModal = () => {
 
     const { isDateModalOpen, closeDateModal } = useUiStore();
-    const { activeEvent, setActiveEvent } = useCalendarStore()
+    const { activeEvent, setActiveEvent, startSavingEvent } = useCalendarStore()
 
     const [formValues, setFormValues] = useState({
         title: '',
@@ -73,7 +73,7 @@ export const CalendarModal = () => {
 		closeDateModal();
 	};
 
-    const onSubmit = (event) => {
+    const onSubmit = async(event) => {
         event.preventDefault();
         setFormSubmitted(true);
 
@@ -92,7 +92,9 @@ export const CalendarModal = () => {
             return;
         }
 
-        console.log({event})
+        await startSavingEvent( formValues );
+        closeDateModal();
+        setFormSubmitted(false);
     }
 
     return (
@@ -103,7 +105,8 @@ export const CalendarModal = () => {
             contentLabel="Example Modal"
             className={"modal"}
             overlayClassName={"modal-fondo"}
-            closeTimeoutMS={200}>
+            closeTimeoutMS={200}
+        >
             <h1> New event </h1>
             <hr />
             <form 
@@ -172,13 +175,21 @@ export const CalendarModal = () => {
                         Additional information
                     </small>
                 </div>
-
-                <button
-                    type="submit"
-                    className="btn btn-outline-primary btn-block">
-                    <i className="far fa-save"></i>
-                    <span> Save</span>
-                </button>
+                <div className="d-flex gap-3">
+                    <button
+                        type="submit"
+                        className="btn btn-outline-primary btn-block">
+                        <i className="far fa-save"></i>
+                        <span> Save</span>
+                    </button>
+                    <button
+                        className="btn btn-outline-danger btn-block"
+                        onClick={closeDateModal}
+                    >
+                        <i class="fa-regular fa-circle-xmark"></i>
+                        <span> Cerrar</span>
+                    </button>
+                </div>
             </form>
         </Modal>
     );
