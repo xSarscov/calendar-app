@@ -63,7 +63,7 @@ export const CalendarPage = () => {
 			<CalendarModal />
 			<FabAddNew />
 			{
-				hasEventSelected && (
+				hasEventSelected && !isDateModalOpen && (
 					<FabDelete />
 				)
 			}
