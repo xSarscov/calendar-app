@@ -71,6 +71,7 @@ export const CalendarModal = () => {
 
 	const onCloseModal = () => {
 		closeDateModal();
+        setActiveEvent(null)
 	};
 
     const onSubmit = async(event) => {
@@ -184,9 +185,10 @@ export const CalendarModal = () => {
                     </button>
                     <button
                         className="btn btn-outline-danger btn-block"
-                        onClick={closeDateModal}
+                        type="button"
+                        onClick={onCloseModal}
                     >
-                        <i class="fa-regular fa-circle-xmark"></i>
+                        <i className="fa-regular fa-circle-xmark"></i>
                         <span> Cerrar</span>
                     </button>
                 </div>
