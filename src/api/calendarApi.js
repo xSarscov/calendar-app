@@ -10,10 +10,7 @@ const calendarApi = axios.create({
 calendarApi.interceptors.request.use((config) => {
     const token = localStorage.getItem('token');
     if (token) {
-        config.headers = {
-            ...config.headers,
-            "x-token": token,
-        };
+        config.headers["x-token"] = token;
     }
 
 	return config;
@@ -34,7 +31,7 @@ calendarApi.interceptors.response.use(
 		if (status === 400 || status === 401) {
 			return Promise.reject({
 				ok: false,
-				msg: data.msg || "Invalid credentials.",
+				msg: data.msg || "Invalid request.",
 			});
 		}
 
